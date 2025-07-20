@@ -21,7 +21,7 @@ import {
   Rocket,
   Brain
 } from 'lucide-react';
-import '../../public/me.jpg';
+import '../assets/me.jpg';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
