@@ -14,23 +14,16 @@ const Header: React.FC = () => {
     <header className="bg-card/80 backdrop-blur-sm border-b shadow-soft sticky top-0 z-50" dir='rtl'>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 space-x-reverse">
-            <h1 className="text-3xl font-arabic-title gradient-primary bg-clip-text text-transparent">
-              نــور
-            </h1>
-            <span className="text-sm text-muted-foreground">
-              القرآن الكريم
-            </span>
-          </Link>
+        
           
-          <nav className="flex items-center space-x-2 space-x-reverse">
+          <nav className="flex items-center space-x-1 space-x-reverse overflow-auto">
             <Button
               variant={isActive('/') ? 'default' : 'ghost'}
               size="sm"
               asChild
             >
               <Link to="/">
-                <Home className="h-4 w-4 ml-2" />
+                <Home className="h-3 w-3 ml-0" />
                 الرئيسية
               </Link>
             </Button>
@@ -41,7 +34,7 @@ const Header: React.FC = () => {
               asChild
             >
               <Link to="/reading">
-                <BookOpen className="h-4 w-4 ml-2" />
+                <BookOpen className="h-3 w-3 ml-1" />
                 القراءة
               </Link>
             </Button>
@@ -52,7 +45,7 @@ const Header: React.FC = () => {
               asChild
             >
               <Link to="/listening">
-                <Headphones className="h-4 w-4 ml-2" />
+                <Headphones className="h-3 w-3 ml-1" />
                 الاستماع
               </Link>
               </Button>
@@ -62,7 +55,7 @@ const Header: React.FC = () => {
               asChild
             >
               <Link to="/about">
-                <Code className="h-4 w-4 ml-2" />
+                <Code className="h-3 w-3 ml-1" />
                 عني
               </Link>
             </Button>
