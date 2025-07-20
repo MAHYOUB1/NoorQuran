@@ -26,7 +26,16 @@ const Header: React.FC = () => {
                 الرئيسية
               </Link>
             </Button>
-            
+            <Button
+              variant={isActive('/listening') ? 'default' : 'ghost'}
+              size="sm"
+              asChild
+            >
+              <Link to="/listening">
+                <Headphones className="h-3 w-3 ml-1" />
+                الاستماع
+              </Link>
+              </Button>
             <Button
               variant={isActive('/reading') ? 'default' : 'ghost'}
               size="sm"
@@ -38,16 +47,7 @@ const Header: React.FC = () => {
               </Link>
             </Button>
             
-            <Button
-              variant={isActive('/listening') ? 'default' : 'ghost'}
-              size="sm"
-              asChild
-            >
-              <Link to="/listening">
-                <Headphones className="h-3 w-3 ml-1" />
-                الاستماع
-              </Link>
-              </Button>
+            
             <Button
               variant={isActive('/about') ? 'default' : 'ghost'}
               size="sm"
