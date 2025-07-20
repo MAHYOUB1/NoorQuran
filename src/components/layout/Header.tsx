@@ -15,7 +15,6 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
         
-          
           <nav className="flex items-center space-x-1 space-x-reverse overflow-auto">
             <Button
               variant={isActive('/') ? 'default' : 'ghost'}
