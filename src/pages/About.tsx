@@ -21,7 +21,7 @@ import {
   Rocket,
   Brain
 } from 'lucide-react';
-import '../assets/me.jpg';
+import Image from '../assets/me.jpg';
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +54,7 @@ const About = () => {
             <div className="w-40 h-40 mx-auto mb-8 relative">
               <div className="w-full h-full rounded-full bg-gradient-to-br from-primary via-secondary to-primary animate-rotate-slow" />
               <div className="absolute inset-2 rounded-full bg-background flex items-center justify-center">
-                <img src='../../public/me.jpg' alt="صورة شخصية لمهيوب عبد الغني الحمادي" className="w-full  text-primary rounded-full" />
+                <img src={Image} alt="صورة شخصية لمهيوب عبد الغني الحمادي" className="w-full  text-primary rounded-full" />
               </div>
             </div>
             
