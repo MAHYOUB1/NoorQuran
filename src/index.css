@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+/* Enhanced Islamic-inspired color palette */
+    --background: 35 25% 98%;
+    --foreground: 30 40% 12%;
+
+    --card: 40 30% 96%;
+    --card-foreground: 30 40% 12%;
+
+    --popover: 40 30% 96%;
+    --popover-foreground: 30 40% 12%;
+
+    /* Royal golden primary color */
+    --primary: 42 95% 58%;
+    --primary-foreground: 30 40% 12%;
+    --primary-glow: 45 90% 72%;
+    --primary-deep: 38 85% 48%;
+
+    /* Deep emerald secondary */
+    --secondary: 158 65% 42%;
+    --secondary-foreground: 40 30% 96%;
+    --secondary-light: 158 55% 55%;
+
+    --muted: 40 15% 90%;
+    --muted-foreground: 36 25% 45%;
+
+    /* Warm accent */
+    --accent: 45 85% 85%;
+    --accent-foreground: 36 45% 15%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 42 30% 95%;
+
+    --border: 40 15% 85%;
+    --input: 40 15% 88%;
+    --ring: 45 90% 55%;
+
+    --radius: 0.75rem;
+
+    /* Reading mode colors */
+    --reading-bg: 42 25% 92%;
+    --reading-paper: 45 15% 88%;
+    --reading-text: 36 50% 12%;
+
+    /* Luxurious Islamic gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(42 95% 58%) 0%, hsl(45 90% 72%) 50%, hsl(38 85% 48%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(158 65% 42%) 0%, hsl(158 55% 55%) 100%);
+    --gradient-warm: linear-gradient(180deg, hsl(35 25% 98%) 0%, hsl(40 30% 94%) 100%);
+    --gradient-royal: linear-gradient(135deg, hsl(42 95% 58%) 0%, hsl(280 85% 65%) 50%, hsl(38 85% 48%) 100%);
+    --gradient-mosque: linear-gradient(180deg, hsl(220 60% 25%) 0%, hsl(42 95% 58%) 50%, hsl(158 65% 42%) 100%);
+    --gradient-sunset: linear-gradient(135deg, hsl(15 85% 65%) 0%, hsl(42 95% 58%) 50%, hsl(280 75% 55%) 100%);
+    
+    /* Exquisite Islamic shadows */
+    --shadow-golden: 0 15px 45px -15px hsl(42 95% 58% / 0.4);
+    --shadow-royal: 0 20px 60px -20px hsl(280 85% 65% / 0.3);
+    --shadow-mosque: 0 12px 40px -12px hsl(220 60% 25% / 0.2);
+    --shadow-soft: 0 6px 25px -6px hsl(30 40% 12% / 0.12);
+    --shadow-reading: 0 10px 40px -10px hsl(30 40% 12% / 0.18);
+    --shadow-glow: 0 0 30px hsl(42 95% 58% / 0.3);
+    --shadow-inner: inset 0 2px 4px hsl(30 40% 12% / 0.06);
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-gentle: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    --sidebar-background: 42 25% 94%;
+    --sidebar-foreground: 36 45% 15%;
+    --sidebar-primary: 45 90% 55%;
+    --sidebar-primary-foreground: 36 45% 15%;
+    --sidebar-accent: 40 15% 90%;
+    --sidebar-accent-foreground: 36 45% 15%;
+    --sidebar-border: 40 15% 85%;
+    --sidebar-ring: 45 90% 55%;
+  }
+
+  .dark {
+    /* Dark Islamic theme */
+    --background: 220 25% 8%;
+    --foreground: 45 90% 85%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 45 90% 85%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 45 90% 85%;
+
+    --primary: 45 90% 65%;
+    --primary-foreground: 220 25% 8%;
+    --primary-glow: 45 85% 75%;
+
+    --secondary: 155 45% 35%;
+    --secondary-foreground: 45 90% 85%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 45 30% 65%;
+
+    --accent: 45 70% 25%;
+    --accent-foreground: 45 90% 85%;
+
+    --destructive: 0 65% 55%;
+    --destructive-foreground: 45 90% 85%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 45 90% 65%;
+
+    /* Dark reading mode */
+    --reading-bg: 220 20% 10%;
+    --reading-paper: 220 15% 15%;
+    --reading-text: 45 90% 80%;
+
+    /* Dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(45 90% 65%) 0%, hsl(45 85% 75%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(155 45% 35%) 0%, hsl(155 40% 45%) 100%);
+    --gradient-warm: linear-gradient(180deg, hsl(220 25% 8%) 0%, hsl(220 20% 12%) 100%);
+
+    --shadow-golden: 0 10px 30px -10px hsl(45 90% 65% / 0.3);
+    --shadow-soft: 0 4px 20px -4px hsl(45 90% 65% / 0.1);
+    --shadow-reading: 0 8px 32px -8px hsl(45 90% 65% / 0.15);
+
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 45 90% 85%;
+    --sidebar-primary: 45 90% 65%;
+    --sidebar-primary-foreground: 220 25% 8%;
+    --sidebar-accent: 220 15% 15%;
+    --sidebar-accent-foreground: 45 90% 85%;
+    --sidebar-border: 220 15% 20%;
+    --sidebar-ring: 45 90% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Amiri', 'Noto Sans Arabic', serif;
+  }
+
+  /* Custom utility classes for the app */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+  
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+  
+  .shadow-golden {
+    box-shadow: var(--shadow-golden);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-reading {
+    box-shadow: var(--shadow-reading);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-gentle {
+    transition: var(--transition-gentle);
+  }
+
+  /* Reading mode specific styles */
+  .reading-mode-bg {
+    background: hsl(var(--reading-bg));
+  }
+  
+  .reading-mode-paper {
+    background: hsl(var(--reading-paper));
+  }
+  
+  .reading-mode-text {
+    color: hsl(var(--reading-text));
+  }
+
+  /* Fade animations for smooth transitions */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .fade-out {
+    animation: fadeOut 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  /* Smooth page navigation */
+  .page-transition {
+    transition: var(--transition-gentle);
+  }
+
+  /* Hidden navigation buttons */
+  .nav-button-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-smooth);
+  }
+  
+  .nav-button-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transition: var(--transition-smooth);
+  }
+
+  /* RTL Support for Arabic text */
+  .arabic-content {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Amiri Quran', 'Amiri', 'Noto Sans Arabic', serif;
+  }
+
+  .arabic-content .ayah {
+    line-height: 2.5;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .arabic-content .ayah:hover {
+    background: hsl(var(--accent) / 0.1);
+    cursor: pointer;
+  }
+
+  /* Enhanced Islamic UI Components */
+  .audio-player {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1));
+    border: 1px solid hsl(var(--border));
+    border-radius: 1rem;
+    margin: 0;
+  
+  }
+
+  .progress-bar {
+    background: hsl(var(--accent));
+    height: 4px;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  /* Islamic Frame Decorations */
+  .islamic-frame {
+    position: relative;
+    background: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--background)) 100%);
+    border-radius: 24px;
+    box-shadow: var(--shadow-golden), var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  .islamic-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, hsl(var(--primary) / 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, hsl(var(--secondary) / 0.1) 0%, transparent 40%),
+      linear-gradient(45deg, transparent 30%, hsl(var(--primary) / 0.05) 50%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .islamic-ornament {
+    background: conic-gradient(from 45deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--primary)));
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+  }
+
+  .islamic-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.1) 2px, transparent 2px),
+      radial-gradient(circle at 75% 75%, hsl(var(--secondary) / 0.1) 2px, transparent 2px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+  }
+
+  .geometric-border {
+    background: linear-gradient(45deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--secondary)) 25%, 
+      hsl(var(--primary)) 50%, 
+      hsl(var(--secondary)) 75%, 
+      hsl(var(--primary)) 100%);
+    background-size: 400% 400%;
+    animation: gradientFlow 8s ease infinite;
+  }
+
+  .floating-element {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--primary-glow)) 50%, 
+      hsl(var(--primary)) 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  /* Advanced Animations */
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes gradientFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.6), 0 0 60px hsl(var(--primary) / 0.3); }
+  }
+
+  @keyframes shimmer {
+    0%, 100% { background-position: -200% 0; }
+    50% { background-position: 200% 0; }
+  }
+
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Responsive Islamic Typography */
+  .quran-text {
+    font-family: 'Amiri Quran', 'Amiri', 'Scheherazade New', serif;
+    line-height: 2.2;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px hsl(var(--foreground) / 0.1);
+  }
+
+  .arabic-calligraphy {
+    font-family: 'Lateef', 'Amiri', 'Reem Kufi', serif;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .duration-5000 {
+    animation-duration: 7s;
+}
+}
