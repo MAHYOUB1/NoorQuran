@@ -11,54 +11,20 @@ const Header: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="bg-card/80 backdrop-blur-sm border-b shadow-soft sticky top-0 z-50" dir='rtl'>
+    <header className="bg-card/80 backdrop-blur-sm border-b shadow-soft sticky top-0 z-50 ">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-        
-          <nav className="flex items-center space-x-1 space-x-reverse overflow-auto">
-            <Button
-              variant={isActive('/') ? 'default' : 'ghost'}
-              size="sm"
-              asChild
-            >
-              <Link to="/">
-                <Home className="h-3 w-3 ml-0" />
-                الرئيسية
-              </Link>
-            </Button>
-            <Button
-              variant={isActive('/listening') ? 'default' : 'ghost'}
-              size="sm"
-              asChild
-            >
-              <Link to="/listening">
-                <Headphones className="h-3 w-3 ml-1" />
-                الاستماع
-              </Link>
-              </Button>
-            <Button
-              variant={isActive('/reading') ? 'default' : 'ghost'}
-              size="sm"
-              asChild
-            >
-              <Link to="/reading">
-                <BookOpen className="h-3 w-3 ml-1" />
-                القراءة
-              </Link>
-            </Button>
-            
-            
-            <Button
-              variant={isActive('/about') ? 'default' : 'ghost'}
-              size="sm"
-              asChild
-            >
-              <Link to="/about">
-                <Code className="h-3 w-3 ml-1" />
-                عني
-              </Link>
-            </Button>
-            
+          <Link to="/" className="flex items-center space-x-2 space-x-reverse">
+            <h1 className="text-3xl font-arabic-title gradient-primary bg-clip-text text-transparent">
+              نــور
+            </h1>
+            <span className="text-sm text-muted-foreground">
+              القرآن الكريم
+            </span>
+          </Link>
+          
+            <nav className="flex items-center space-x-1 space-x-reverse overflow-auto">
+  
             <Button
               variant="outline"
               size="sm"
