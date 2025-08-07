@@ -20,6 +20,7 @@ interface AudioPlayerProps {
   onNext?: () => void;
   onPrevious?: () => void;
   onClose?: () => void;
+  autoPlay?: boolean; // إضافة خاصية التشغيل التلقائي
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
@@ -28,7 +29,8 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   audioUrl,
   onNext,
   onPrevious,
-  onClose
+  onClose,
+  autoPlay = true // قيمة افتراضية true للتشغيل التلقائي
 }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -45,7 +47,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
     const handleLoadStart = () => setIsLoading(true);
-    const handleCanPlay = () => setIsLoading(false);
+    const handleCanPlay = () => {
+      setIsLoading(false);
+      if (autoPlay) { // التشغيل التلقائي عند جاهزية الصوت
+        audio.play().then(() => {
+          setIsPlaying(true);
+        }).catch(error => {
+          console.error("فشل التشغيل التلقائي:", error);
+        });
+      }
+    };
     const handleEnded = () => {
       setIsPlaying(false);
       if (onNext) onNext();
@@ -64,13 +75,19 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       audio.removeEventListener('canplay', handleCanPlay);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [onNext]);
+  }, [onNext, autoPlay]); // إضافة autoPlay إلى تبعيات useEffect
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = isMuted ? 0 : volume;
     }
   }, [volume, isMuted]);
+
+  // إعادة تعيين حالة التشغيل عند تغيير audioUrl
+  useEffect(() => {
+    setIsPlaying(false);
+    setIsLoading(true);
+  }, [audioUrl]);
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -79,7 +96,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     if (isPlaying) {
       audio.pause();
     } else {
-      audio.play();
+      audio.play().catch(error => {
+        console.error("فشل تشغيل الصوت:", error);
+      });
     }
     setIsPlaying(!isPlaying);
   };
@@ -108,11 +127,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   };
 
   return (
-    <Card className="audio-player shadow-golden min-w-fit ">
+    <Card className="audio-player shadow-golden  ">
       <CardContent className="p-6">
-        <audio ref={audioRef} src={audioUrl} preload="metadata" />
+        <audio ref={audioRef} src={audioUrl} preload="auto" />
       
-
         {/* Controls */}
         <div className="flex items-center justify-between mb-5 space-x-4 space-x-reverse">
           <Button
@@ -129,7 +147,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
             size="lg"
             onClick={togglePlay}
             disabled={isLoading}
-            className="rounded-full w-16 h-16 "
+            className="rounded-full w-16 h-16"
           >
             {isLoading ? (
               <Loader2 className="h-6 w-6 animate-spin" />
@@ -145,11 +163,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
             size="sm"
             onClick={onNext}
             disabled={!onNext}
-             
           >
             <SkipForward className="h-4 w-4" />
           </Button>
         </div>
+        
         {/* Progress Bar */}
         <div className="mb-0">
           <Slider
@@ -166,9 +184,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
           </div>
         </div>
 
-
       
-
         {/* Close Button */}
         {onClose && (
           <div className="mt-4 text-center">

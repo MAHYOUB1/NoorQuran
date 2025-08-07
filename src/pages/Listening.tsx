@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useCallback} from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button-variants';
@@ -18,56 +18,53 @@ const Listening: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentSurah, setCurrentSurah] = useState<Surah | null>(null);
-  const [audioUrl, setAudioUrl] = useState<string>('mahyoub');
+  const [audioUrl, setAudioUrl] = useState<string>('');
   const [showPlayer, setShowPlayer] = useState(false);
   const { toast } = useToast();
 
-  useEffect(() => {
-    if (reciterId) {
-      loadSurahs();
-    } else {
-      loadReciters();
-    }
-  }, [reciterId]);
+  
+const loadReciters = useCallback(async () => {
+  setLoading(true);
+  try {
+    const recitersData = await getReciters();
+    const arabicReciters = recitersData.filter(r => 
+      r.language === 'ar' && r.format === 'audio'
+    );
+    setReciters(arabicReciters);
+  } catch (error) {
+    toast({
+      title: "خطأ",
+      description: "فشل في تحميل قائمة القراء",
+      variant: "destructive"
+    });
+  } finally {
+    setLoading(false);
+  }
+}, []); // لا تعتمد على أي متغيرات خارجية
 
-  const loadReciters = async () => {
-    setLoading(true);
-    try {
-      const recitersData = await getReciters();
-      // Filter for Arabic reciters only
-      const arabicReciters = recitersData.filter(r => 
-        r.language === 'ar' && r.format === 'audio'
-      );
-      setReciters(arabicReciters);
-    } catch (error) {
-      toast({
-        title: "خطأ",
-        description: "فشل في تحميل قائمة القراء",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+const loadSurahs = useCallback(async () => {
+  setLoading(true);
+  try {
+    const surahsData = await getSurahs();
+    setSurahs(surahsData);
+  } catch (error) {
+    toast({
+      title: "خطأ",
+      description: "فشل في تحميل قائمة السور",
+      variant: "destructive"
+    });
+  } finally {
+    setLoading(false);
+  }
+}, []); // لا تعتمد على أي متغيرات خارجية
 
-
-
-  const loadSurahs = async () => {
-    setLoading(true);
-    try {
-      const surahsData = await getSurahs();
-      setSurahs(surahsData);
-    } catch (error) {
-      toast({
-        title: "خطأ",
-        description: "فشل في تحميل قائمة السور",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
+useEffect(() => {
+  if (reciterId) {
+    loadSurahs();
+  } else {
+    loadReciters();
+  }
+}, [reciterId, loadSurahs, loadReciters]); // الآن useEffect يعتمد على كل التبعيات المطلوبة
   const playAudio = async (surahNumber: number) => {
     try {
       if (!reciterId) return;
@@ -236,31 +233,35 @@ const Listening: React.FC = () => {
               onClick={() => playAudio(surah.number)}
             >
               <CardHeader>
-                <CardTitle className="text-right font-arabic flex items-center justify-between">
-                  <Play className={`h-5 w-5 ${
-                    currentSurah?.number === surah.number ? 'text-primary animate-pulse' : 'text-muted-foreground'
-                  }`} />
+                <CardTitle className=" font-arabic flex  items-center justify-between">
+                
                   <div>
-                    <span className="text-primary ml-2">{surah.number}.</span>
+                    <span className=" text-primary ml-2">{surah.number}.</span>
                     {surah.name}
                   </div>
+                    <Play className={`h-5 w-5 ${
+                    currentSurah?.number === surah.number ? 'text-primary animate-pulse' : 'text-muted-foreground'
+                  }`} />
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground text-right">
-                  {surah.englishNameTranslation} • {surah.numberOfAyahs} آية
+                <p className="text-sm text-muted-foreground ">
+                   {surah.numberOfAyahs} آية 
+                   {surah.revelationType === 'Meccan' ? ' - مكية  ' : ' - مدنية  '}
                 </p>
                 <p className="text-xs text-muted-foreground text-right mt-1">
-                  {surah.revelationType === 'Meccan' ? 'مكية' : 'مدنية'}
+                  
                 </p>
               </CardContent>
             </Card>
           ))}
         </div>
 
+      
+      </div>
         {/* Audio Player */}
         {showPlayer && currentSurah && audioUrl && (
-          <div className=" backdrop-blur-sm border-b  sticky bottom-0   z-50 ">
+          <div className=" backdrop-blur-sm   sticky bottom-12   z-50 ">
             <AudioPlayer
               surah={currentSurah}
               reciterName={selectedReciter?.name || 'القارئ المحدد'}
@@ -271,7 +272,6 @@ const Listening: React.FC = () => {
             />
           </div>
         )}
-      </div>
     </div>
   );
 };
